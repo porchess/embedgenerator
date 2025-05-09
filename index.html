@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discord Embed Creator</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Add Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <div class="editor-container">
+            <h1>Discord Embed Creator</h1>
+            
+            <!-- Webhook URL field with Send button -->
+            <div class="form-group webhook-url-container">
+                <label for="webhook-url">Webhook URL</label>
+                <input type="text" id="webhook-url" class="form-control" placeholder="https://discord.com/api/webhooks/...">
+                <button id="send-webhook" class="webhook-send-btn" disabled><i class="fas fa-paper-plane"></i> Send</button>
+            </div>
+            
+            <!-- New webhook profile settings section -->
+            <div class="editor-section webhook-profile">
+                <h2>Profile
+                    <button class="section-toggle"><i class="fas fa-chevron-down"></i></button>
+                </h2>
+                <div class="section-content collapsed">
+                    <div class="form-group">
+                        <label for="webhook-name">Name</label>
+                        <span class="character-count">0/80</span>
+                        <input type="text" id="webhook-name" class="form-control" maxlength="80" placeholder="Webhook name">
+                    </div>
+                    <div class="form-group">
+                        <label for="webhook-avatar">Avatar URL</label>
+                        <input type="text" id="webhook-avatar" class="form-control" placeholder="https://example.com/avatar.png">
+                        <button class="file-button"><i class="fas fa-upload"></i></button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Add Message 1 with toggle button -->
+            <div class="message-wrapper editor-section">
+                <h2>Message 1
+                    <div class="message-actions">
+                        <button class="message-duplicate-btn" title="Duplicate message"><i class="fas fa-copy"></i></button>
+                        <button class="message-delete-btn" title="Delete message"><i class="fas fa-trash"></i></button>
+                    </div>
+                    <button class="section-toggle"><i class="fas fa-chevron-down"></i></button>
+                </h2>
+                <div class="message-wrapper-content">
+                    <!-- Message content field with fixed character count -->
+                    <div class="message-content-container">
+                        <label for="message-content">Content</label>
+                        <span class="character-count">0/2000</span>
+                        <textarea id="message-content" class="form-control" maxlength="2000" placeholder="Message content"></textarea>
+                    </div>
+                    
+                    <!-- ── Embed‑wrapper start ── -->
+                    <div class="editor-section embed-group">
+                        <h2>Embed 1
+                            <div class="embed-actions">
+                                <button class="embed-duplicate-btn" title="Duplicate embed"><i class="fas fa-copy"></i></button>
+                                <button class="embed-delete-btn" title="Delete embed"><i class="fas fa-trash"></i></button>
+                            </div>
+                            <button class="section-toggle"><i class="fas fa-chevron-down"></i></button>
+                        </h2>
+                        <div class="section-content collapsed">
+
+                            <div class="editor-section">
+                                <h2>Author
+                                    <button class="section-toggle"><i class="fas fa-chevron-down"></i></button>
+                                </h2>
+                                <div class="section-content collapsed">
+                                    <div class="form-group">
+                                        <label for="author-name">Name</label>
+                                        <span class="character-count">0/256</span>
+                                        <input type="text" id="author-name" class="form-control" maxlength="256">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="author-icon">Icon URL</label>
+                                        <input type="text" id="author-icon" class="form-control">
+                                        <button class="file-button"><i class="fas fa-upload"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="editor-section">
+                                <h2>Основные настройки</h2>
+                                <div class="form-group">
+                                    <label for="embed-title">Title</label>
+                                    <span class="character-count">0/256</span>
+                                    <input type="text" id="embed-title" maxlength="256" class="form-control">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="embed-description">Description</label>
+                                    <span class="character-count">0/4096</span>
+                                    <textarea id="embed-description" class="form-control" maxlength="4096"></textarea>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="embed-color">Sidebar Color</label>
+                                    <input type="color" id="embed-color" class="form-control color-input" value="#2b2d31">
+                                    <input type="text" id="embed-color-text" class="form-control" value="#2b2d31">
+                                    <input type="range" id="embed-color-slider" min="0" max="360" value="240" class="custom-slider">
+                                </div>
+                            </div>
+                            
+                            <div class="editor-section">
+                                <h2>Images
+                                    <button class="section-toggle"><i class="fas fa-chevron-down"></i></button>
+                                </h2>
+                                <div class="section-content collapsed">
+                                    <div class="form-group">
+                                        <label for="large-image">Large Image URL</label>
+                                        <input type="text" id="large-image" class="form-control">
+                                        <button class="file-button"><i class="fas fa-upload"></i></button>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="thumbnail">Thumbnail URL</label>
+                                        <input type="text" id="thumbnail" class="form-control">
+                                        <button class="file-button"><i class="fas fa-upload"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="editor-section">
+                                <h2>Footer
+                                    <button class="section-toggle"><i class="fas fa-chevron-down"></i></button>
+                                </h2>
+                                <div class="section-content collapsed">
+                                    <div class="form-group">
+                                        <label for="footer-text">Text</label>
+                                        <span class="character-count">0/2048</span>
+                                        <input type="text" id="footer-text" class="form-control" maxlength="2048">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="footer-icon">Icon URL</label>
+                                        <input type="text" id="footer-icon" class="form-control">
+                                        <button class="file-button"><i class="fas fa-upload"></i></button>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="timestamp">Timestamp</label>
+                                        <input type="datetime-local" id="timestamp" class="form-control">
+                                        <button class="calendar-button"><i class="fas fa-calendar-alt"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="editor-section">
+                                <h2>Fields
+                                    <button class="section-toggle"><i class="fas fa-chevron-down"></i></button>
+                                </h2>
+                                <div class="section-content collapsed">
+                                    <div id="fields-container"></div>
+                                    <button id="add-field" class="add-button">Add Field</button>
+                                </div>
+                            </div>
+                        </div><!-- /.section-content -->
+                    </div><!-- /.embed-group -->
+
+                    <div class="actions">
+                        <div class="dropdown-container">
+                            <button class="action-button primary bold-button" id="add-button"><i class="fas fa-plus"></i> Add <i class="fas fa-caret-down"></i></button>
+                            <div class="dropdown-menu" id="add-dropdown">
+                                <button class="dropdown-item" id="add-embed-button"><i class="fas fa-plus-circle"></i> Embed</button>
+                            </div>
+                        </div>
+                        
+                        <div class="dropdown-container">
+                            <button class="action-button bold-button" id="options-button"><i class="fas fa-cog"></i> Options <i class="fas fa-caret-down"></i></button>
+                            <div class="dropdown-menu" id="options-dropdown">
+                                <button class="dropdown-item" id="clear-all"><i class="fas fa-trash"></i> Clear All</button>
+                                <button class="dropdown-item" id="generate-json"><i class="fas fa-download"></i> Download JSON</button>
+                                <button class="dropdown-item" id="copy-json"><i class="fas fa-copy"></i> Copy JSON</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Add message button below Message 1 but outside the block -->
+            <button id="add-message" class="add-message-button">
+                <i class="fas fa-plus"></i> Add Message
+            </button>
+        </div>
+        
+        <div class="preview-container">
+            <h2>Preview</h2>
+            <div class="discord-preview">
+                <div class="discord-message-container">
+                    <div class="discord-embed" id="embed-preview">
+                        <div class="embed-sidebar"></div>
+                        <div class="embed-content">
+                            <div class="embed-author">
+                                <img class="embed-author-icon" src="">
+                                <span class="embed-author-name"></span>
+                            </div>
+                            <div class="embed-title"></div>
+                            <div class="embed-description"></div>
+                            <div class="embed-fields"></div>
+                            <div class="embed-image">
+                                <img src="" alt="">
+                            </div>
+                            <div class="embed-footer">
+                                <img class="embed-footer-icon" src="">
+                                <span class="embed-footer-text"></span>
+                                <span class="embed-footer-timestamp"></span>
+                            </div>
+                        </div>
+                        <div class="embed-thumbnail">
+                            <img src="" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="editor-section json-section">
+                <h2>JSON Output
+                    <button class="section-toggle">
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="json-actions">
+                        <button class="json-copy-btn" title="Copy JSON"><i class="fas fa-copy"></i></button>
+                        <button class="json-edit-btn" title="Edit JSON"><i class="fas fa-edit"></i></button>
+                    </div>
+                </h2>
+                <div class="section-content collapsed">
+                    <pre id="json-code"></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Toast notification -->
+    <div class="toast-notification" id="copy-toast">
+        <i class="fas fa-check"></i> JSON copied to clipboard
+    </div>
+
+    <!-- Add confirmation modal for Clear All -->
+    <div class="toast-notification" id="confirm-clear-toast">
+        <div class="confirm-message">
+            <i class="fas fa-exclamation-triangle warning-icon"></i>
+            <span>Are you sure you want to clear all fields?</span>
+        </div>
+        <div class="confirm-buttons">
+            <button id="confirm-clear-yes" class="mini-button confirm-yes">Yes</button>
+            <button id="confirm-clear-no" class="mini-button confirm-no">No</button>
+        </div>
+    </div>
+
+    <!-- JSON Edit Modal -->
+    <div class="modal-overlay" id="json-modal-overlay">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3>Edit JSON</h3>
+                <button class="modal-close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="error-message" id="json-error"></div>
+                <textarea id="json-editor"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button class="action-button" id="json-cancel">Cancel</button>
+                <button class="action-button primary" id="json-save">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
